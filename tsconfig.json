@@ -19,7 +19,8 @@
     "strictPropertyInitialization": false,
     "typeRoots": ["./node_modules/@types"],
     "outDir": "dist",
-    "incremental": false
+    "incremental": false,
+    "skipLibCheck": true
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "cdk.out"]

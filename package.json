@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "cp package.json dist/package.json && cd dist && npm install --only=production",
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
@@ -16,7 +17,9 @@
     "static-analysis": "npx eslint . --ext .ts",
     "prettier": "npx prettier --write ."
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "0.25.0"
+  },
   "devDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.8.0-alpha.0",
     "@aws-cdk/aws-apigatewayv2-integrations-alpha": "2.8.0-alpha.0",
