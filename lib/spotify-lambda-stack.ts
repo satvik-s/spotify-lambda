@@ -23,9 +23,9 @@ export class SpotifyLambdaStack extends Stack {
             },
             description: 'spotify now playing lambda',
             environment: {
-                CLIENT_ID: process.env.SPOTIFY_BLOG_APP_CLIENT_ID,
-                CLIENT_SECRET: process.env.SPOTIFY_BLOG_APP_CLIENT_SECRET,
-                REFRESH_TOKEN: process.env.SPOTIFY_BLOG_APP_REFRESH_TOKEN,
+                CLIENT_ID: process.env.SPOTIFY_BLOG_APP_CLIENT_ID ?? '',
+                CLIENT_SECRET: process.env.SPOTIFY_BLOG_APP_CLIENT_SECRET ?? '',
+                REFRESH_TOKEN: process.env.SPOTIFY_BLOG_APP_REFRESH_TOKEN ?? '',
             },
             functionName: 'spotify-now-playing',
             handler: 'now-playing.main',
