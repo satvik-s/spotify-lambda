@@ -2,3 +2,7 @@ package-lock.json
 .npmrc
 .prettierignore
 .husky/
+cdk.out/
+dist/
+Makefile
+.gitignore
