@@ -10,12 +10,11 @@ export class SpotifyLambdaStack extends Stack {
 
         // 👇 lambda function definition
         const lambdaFunction = new Function(this, 'spotify-now-playing', {
-            code: Code.fromAsset(path.join(__dirname, '/../src/handlers')),
+            code: Code.fromAsset(path.join(__dirname, '/../dist')),
             functionName: 'spotify-now-playing',
             handler: 'now-playing.main',
             logRetention: RetentionDays.THREE_DAYS,
             memorySize: 128,
-            reservedConcurrentExecutions: 2,
             runtime: Runtime.NODEJS_14_X,
             timeout: Duration.seconds(2),
             currentVersionOptions: {
