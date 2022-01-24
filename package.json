@@ -8,20 +8,35 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
-  },
-  "devDependencies": {
-    "@types/jest": "26.0.10",
-    "@types/node": "10.17.27",
-    "jest": "26.4.2",
-    "ts-jest": "26.2.0",
-    "aws-cdk": "2.8.0",
-    "ts-node": "9.0.0",
-    "typescript": "3.9.7"
+    "cdk": "cdk",
+    "prepare": "husky install",
+    "static-analysis": "npx eslint . --ext .ts",
+    "prettier": "npx prettier --write ."
   },
   "dependencies": {
     "aws-cdk-lib": "2.8.0",
     "constructs": "10.0.0",
     "source-map-support": "0.5.16"
+  },
+  "devDependencies": {
+    "@types/jest": "26.0.10",
+    "@types/node": "10.17.27",
+    "@typescript-eslint/eslint-plugin": "5.10.0",
+    "@typescript-eslint/parser": "5.10.0",
+    "aws-cdk": "2.8.0",
+    "eslint": "8.7.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-import": "2.25.4",
+    "husky": "7.0.4",
+    "jest": "26.4.2",
+    "lint-staged": "12.3.1",
+    "prettier": "2.5.1",
+    "ts-jest": "26.2.0",
+    "ts-node": "9.0.0",
+    "typescript": "3.9.7"
+  },
+  "lint-staged": {
+    "*": "npm run prettier"
   }
 }

@@ -1,16 +1,26 @@
-import { Stack, StackProps } from 'aws-cdk-lib';
+import { Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as path from 'path';
 
 export class SpotifyLambdaStack extends Stack {
-  constructor(scope: Construct, id: string, props?: StackProps) {
-    super(scope, id, props);
+    constructor(scope: Construct, id: string, props?: StackProps) {
+        super(scope, id, props);
 
-    // The code that defines your stack goes here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'SpotifyLambdaQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
-  }
+        // 👇 lambda function definition
+        const lambdaFunction = new Function(this, 'spotify-now-playing', {
+            code: Code.fromAsset(path.join(__dirname, '/../src/handlers')),
+            functionName: 'spotify-now-playing',
+            handler: 'now-playing.main',
+            logRetention: RetentionDays.THREE_DAYS,
+            memorySize: 128,
+            reservedConcurrentExecutions: 2,
+            runtime: Runtime.NODEJS_14_X,
+            timeout: Duration.seconds(2),
+            currentVersionOptions: {
+                removalPolicy: RemovalPolicy.DESTROY,
+            },
+        });
+    }
 }
