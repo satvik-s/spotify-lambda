@@ -48,12 +48,18 @@ async function getNowPlaying() {
             },
         });
         console.log(`playing ${JSON.stringify(response.data, null, 2)}`);
+
+        if (response.data?.is_playing) {
+            return {
+                is_playing: true,
+                artists: response.data?.item?.artists,
+                currently_playing_type: response.data?.currently_playing_type,
+                name: response.data?.item?.name,
+                url: response.data?.item?.external_urls.spotify,
+            };
+        }
         return {
-            is_playing: true,
-            artists: response.data?.item?.artists,
-            currently_playing_type: response.data?.currently_playing_type,
-            name: response.data?.item?.name,
-            url: response.data?.item?.external_urls.spotify,
+            is_playing: false,
         };
     } catch (error) {
         const err = error as AxiosError;
