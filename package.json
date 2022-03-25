@@ -19,7 +19,7 @@
     "package-update": "npx ncu -u"
   },
   "dependencies": {
-    "axios": "0.25.0"
+    "axios": "0.26.1"
   },
   "devDependencies": {
     "@aws-cdk/aws-apigatewayv2-alpha": "2.17.0-alpha.0",
