@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
+// eslint-disable-next-line import/no-unresolved, import/extensions
 import { SpotifyLambdaStack } from '../lib/spotify-lambda-stack';
 
 const app = new cdk.App();
+// eslint-disable-next-line no-new
 new SpotifyLambdaStack(app, 'SpotifyLambdaStack', {
     /* If you don't specify 'env', this stack will be environment-agnostic.
      * Account/Region-dependent features and context lookups will not work,

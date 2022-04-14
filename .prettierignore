@@ -6,3 +6,4 @@ cdk.out/
 dist/
 Makefile
 .gitignore
+node_modules/
