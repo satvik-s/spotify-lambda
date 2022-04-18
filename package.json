@@ -29,7 +29,7 @@
     "@typescript-eslint/eslint-plugin": "5.19.0",
     "@typescript-eslint/parser": "5.19.0",
     "aws-cdk-lib": "2.20.0",
-    "constructs": "10.0.114",
+    "constructs": "10.0.118",
     "eslint": "8.13.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "8.5.0",
