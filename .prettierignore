@@ -7,3 +7,4 @@ dist/
 Makefile
 .gitignore
 node_modules/
+**/*.yml
