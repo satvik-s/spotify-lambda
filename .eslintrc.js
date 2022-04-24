@@ -1,7 +1,7 @@
 module.exports = {
     root: true,
     parser: '@typescript-eslint/parser',
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint', 'simple-import-sort'],
     extends: [
         'eslint:recommended',
         'plugin:@typescript-eslint/recommended',
@@ -18,5 +18,10 @@ module.exports = {
         'node/no-missing-import': 'off',
         'node/no-unsupported-features/es-syntax': 'off',
         'node/shebang': 'off',
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error',
+        'import/first': 'error',
+        'import/newline-after-import': 'error',
+        'import/no-duplicates': 'error',
     },
 };

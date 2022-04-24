@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
+
 import * as cdk from 'aws-cdk-lib';
+
 // eslint-disable-next-line import/no-unresolved, import/extensions
 import { SpotifyLambdaStack } from '../lib/spotify-lambda-stack';
 
