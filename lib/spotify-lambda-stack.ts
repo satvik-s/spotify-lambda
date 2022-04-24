@@ -6,7 +6,13 @@ import {
 } from '@aws-cdk/aws-apigatewayv2-alpha';
 import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import { Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
-import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import {
+    Code,
+    Function,
+    FunctionUrlAuthType,
+    Runtime,
+    HttpMethod as LambdaHttpMethod,
+} from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
 import * as path from 'path';
@@ -33,6 +39,15 @@ export class SpotifyLambdaStack extends Stack {
             memorySize: 128,
             runtime: Runtime.NODEJS_14_X,
             timeout: Duration.seconds(2),
+        });
+
+        lambdaFunction.addFunctionUrl({
+            authType: FunctionUrlAuthType.NONE,
+            cors: {
+                allowedMethods: [LambdaHttpMethod.GET],
+                allowedOrigins: ['*'],
+                maxAge: Duration.minutes(1),
+            },
         });
 
         const apiGateway = new HttpApi(this, 'spotify', {

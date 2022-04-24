@@ -74,7 +74,7 @@ async function getNowPlaying() {
     }
 }
 
-export async function main(event: unknown) {
+export async function main(_event: unknown) {
     if (CLIENT_ID === '' || CLIENT_SECRET === '' || REFRESH_TOKEN === '') {
         throw new Error('secrets not initialized');
     }
