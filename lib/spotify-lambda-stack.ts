@@ -1,17 +1,10 @@
-import {
-    CorsHttpMethod,
-    HttpApi,
-    HttpMethod,
-    PayloadFormatVersion,
-} from '@aws-cdk/aws-apigatewayv2-alpha';
-import { HttpLambdaIntegration } from '@aws-cdk/aws-apigatewayv2-integrations-alpha';
 import { Duration, RemovalPolicy, Stack, StackProps } from 'aws-cdk-lib';
 import {
     Code,
     Function,
     FunctionUrlAuthType,
+    HttpMethod,
     Runtime,
-    HttpMethod as LambdaHttpMethod,
 } from 'aws-cdk-lib/aws-lambda';
 import { RetentionDays } from 'aws-cdk-lib/aws-logs';
 import { Construct } from 'constructs';
@@ -44,41 +37,10 @@ export class SpotifyLambdaStack extends Stack {
         lambdaFunction.addFunctionUrl({
             authType: FunctionUrlAuthType.NONE,
             cors: {
-                allowedMethods: [LambdaHttpMethod.GET],
+                allowedMethods: [HttpMethod.GET],
                 allowedOrigins: ['*'],
                 maxAge: Duration.minutes(1),
             },
-        });
-
-        const apiGateway = new HttpApi(this, 'spotify', {
-            apiName: 'spotify',
-            corsPreflight: {
-                allowMethods: [CorsHttpMethod.GET],
-                allowOrigins: ['*'],
-                maxAge: Duration.minutes(10),
-            },
-            createDefaultStage: false,
-            description: 'spotify api gateway',
-            disableExecuteApiEndpoint: false,
-        });
-
-        apiGateway.addStage('v1 stage', {
-            autoDeploy: true,
-            stageName: 'v1',
-        });
-
-        const nowPlayingLambdaIntegration = new HttpLambdaIntegration(
-            'spotify-now-playing-lambda-integration',
-            lambdaFunction,
-            {
-                payloadFormatVersion: PayloadFormatVersion.VERSION_2_0,
-            },
-        );
-
-        apiGateway.addRoutes({
-            integration: nowPlayingLambdaIntegration,
-            methods: [HttpMethod.GET],
-            path: '/now-playing',
         });
     }
 }
