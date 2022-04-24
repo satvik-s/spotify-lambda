@@ -79,8 +79,11 @@ export async function main(_event: unknown) {
         throw new Error('secrets not initialized');
     }
 
+    const nowPlaying = await getNowPlaying();
+    console.log(JSON.stringify(nowPlaying, null, 2));
+
     return {
-        body: JSON.stringify(await getNowPlaying()),
+        body: JSON.stringify(nowPlaying),
         headers: { 'Content-Type': 'application/json' },
         statusCode: 200,
     };
