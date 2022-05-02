@@ -54,15 +54,16 @@ async function getNowPlaying() {
         console.log(`playing ${JSON.stringify(response.data, null, 2)}`);
 
         const data = response.data;
-        if (data.is_playing) {
+        if (data.is_playing && data.currently_playing_type === 'track') {
             return {
                 is_playing: true,
-                artists: data.item?.artists,
-                currently_playing_type: data.currently_playing_type,
-                name: data.item?.name,
+                artists: data.item?.artists
+                    ?.map((artist: { name: string }) => artist.name)
+                    .join(', '),
+                track_name: data.item?.name,
                 album: data.item?.album?.name,
                 album_image_url: data.item?.album?.images?.[0]?.url,
-                url: response.data?.item?.external_urls?.spotify,
+                track_url: response.data?.item?.external_urls?.spotify,
             };
         }
         return {
