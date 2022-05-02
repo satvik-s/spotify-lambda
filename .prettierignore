@@ -3,7 +3,7 @@ package-lock.json
 .prettierignore
 .husky/
 cdk.out/
-dist/
+dist*/
 Makefile
 .gitignore
 node_modules/

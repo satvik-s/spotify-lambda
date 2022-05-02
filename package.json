@@ -5,8 +5,10 @@
     "spotify-lambda": "bin/spotify-lambda.js"
   },
   "scripts": {
-    "build": "$(npm bin)/tsc",
-    "postbuild": "cp package.json dist/package.json && cd dist && npm install --only=production",
+    "build-now-playing": "$(npm bin)/tsc --project tsconfig.now-playing.json",
+    "build-top-tracks": "$(npm bin)/tsc --project tsconfig.top-tracks.json",
+    "postbuild-now-playing": "cp package.json dist-now-playing/package.json && cd dist-now-playing && npm install --only=production",
+    "postbuild-top-tracks": "cp package.json dist-top-tracks/package.json && cd dist-top-tracks && npm install --only=production",
     "watch": "$(npm bin)/tsc -w",
     "test": "$(npm bin)/jest",
     "prepare": "$(npm bin)/husky install",

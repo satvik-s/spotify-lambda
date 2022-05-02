@@ -14,27 +14,70 @@ export class SpotifyLambdaStack extends Stack {
     constructor(scope: Construct, id: string, props?: StackProps) {
         super(scope, id, props);
 
-        // 👇 lambda function definition
-        const lambdaFunction = new Function(this, 'spotify-now-playing', {
-            code: Code.fromAsset(path.join(__dirname, '/../dist')),
-            currentVersionOptions: {
-                removalPolicy: RemovalPolicy.DESTROY,
+        const nowPlayingLambdaFunction = new Function(
+            this,
+            'spotify-now-playing',
+            {
+                code: Code.fromAsset(
+                    path.join(__dirname, '/../dist-now-playing'),
+                ),
+                currentVersionOptions: {
+                    removalPolicy: RemovalPolicy.DESTROY,
+                },
+                description: 'spotify now playing lambda',
+                environment: {
+                    CLIENT_ID: process.env.SPOTIFY_BLOG_APP_CLIENT_ID ?? '',
+                    CLIENT_SECRET:
+                        process.env.SPOTIFY_BLOG_APP_CLIENT_SECRET ?? '',
+                    REFRESH_TOKEN:
+                        process.env.SPOTIFY_BLOG_APP_REFRESH_TOKEN ?? '',
+                },
+                functionName: 'spotify-now-playing',
+                handler: 'now-playing.main',
+                logRetention: RetentionDays.THREE_DAYS,
+                memorySize: 128,
+                runtime: Runtime.NODEJS_14_X,
+                timeout: Duration.seconds(2),
             },
-            description: 'spotify now playing lambda',
-            environment: {
-                CLIENT_ID: process.env.SPOTIFY_BLOG_APP_CLIENT_ID ?? '',
-                CLIENT_SECRET: process.env.SPOTIFY_BLOG_APP_CLIENT_SECRET ?? '',
-                REFRESH_TOKEN: process.env.SPOTIFY_BLOG_APP_REFRESH_TOKEN ?? '',
+        );
+
+        nowPlayingLambdaFunction.addFunctionUrl({
+            authType: FunctionUrlAuthType.NONE,
+            cors: {
+                allowedMethods: [HttpMethod.GET],
+                allowedOrigins: ['*'],
+                maxAge: Duration.minutes(1),
             },
-            functionName: 'spotify-now-playing',
-            handler: 'now-playing.main',
-            logRetention: RetentionDays.THREE_DAYS,
-            memorySize: 128,
-            runtime: Runtime.NODEJS_14_X,
-            timeout: Duration.seconds(2),
         });
 
-        lambdaFunction.addFunctionUrl({
+        const topTracksLambdaFunction = new Function(
+            this,
+            'spotify-top-tracks',
+            {
+                code: Code.fromAsset(
+                    path.join(__dirname, '/../dist-top-tracks'),
+                ),
+                currentVersionOptions: {
+                    removalPolicy: RemovalPolicy.DESTROY,
+                },
+                description: 'spotify now playing lambda',
+                environment: {
+                    CLIENT_ID: process.env.SPOTIFY_BLOG_APP_CLIENT_ID ?? '',
+                    CLIENT_SECRET:
+                        process.env.SPOTIFY_BLOG_APP_CLIENT_SECRET ?? '',
+                    REFRESH_TOKEN:
+                        process.env.SPOTIFY_BLOG_APP_REFRESH_TOKEN ?? '',
+                },
+                functionName: 'spotify-top-tracks',
+                handler: 'top-tracks.main',
+                logRetention: RetentionDays.THREE_DAYS,
+                memorySize: 128,
+                runtime: Runtime.NODEJS_14_X,
+                timeout: Duration.seconds(2),
+            },
+        );
+
+        topTracksLambdaFunction.addFunctionUrl({
             authType: FunctionUrlAuthType.NONE,
             cors: {
                 allowedMethods: [HttpMethod.GET],
