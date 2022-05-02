@@ -57,13 +57,7 @@ async function getNowPlaying() {
         if (data.is_playing && data.currently_playing_type === 'track') {
             return {
                 is_playing: true,
-                artists: data.item?.artists
-                    ?.map((artist: { name: string }) => artist.name)
-                    .join(', '),
-                track_name: data.item?.name,
-                album: data.item?.album?.name,
-                album_image_url: data.item?.album?.images?.[0]?.url,
-                track_url: response.data?.item?.external_urls?.spotify,
+                ...getTrackInfo(data.item),
             };
         }
         return {
@@ -76,6 +70,18 @@ async function getNowPlaying() {
             is_playing: false,
         };
     }
+}
+
+function getTrackInfo(track: any) {
+    return {
+        artists: track?.artists
+            ?.map((artist: { name: string }) => artist.name)
+            .join(', '),
+        track_name: track?.name,
+        album: track?.album?.name,
+        album_image_url: track?.album?.images?.[0]?.url,
+        track_url: track?.external_urls?.spotify,
+    };
 }
 
 export async function main(_event: unknown) {
