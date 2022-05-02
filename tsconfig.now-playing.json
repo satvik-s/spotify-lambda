@@ -18,11 +18,11 @@
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
     "typeRoots": ["./node_modules/@types"],
-    "outDir": "dist",
+    "outDir": "dist-now-playing",
     "incremental": false,
     "skipLibCheck": true,
     "esModuleInterop": true
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/now-playing.ts"],
   "exclude": ["node_modules", "cdk.out", "test"]
 }
