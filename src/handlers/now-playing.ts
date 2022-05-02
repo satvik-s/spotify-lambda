@@ -53,12 +53,15 @@ async function getNowPlaying() {
         });
         console.log(`playing ${JSON.stringify(response.data, null, 2)}`);
 
-        if (response.data?.is_playing) {
+        const data = response.data;
+        if (data.is_playing) {
             return {
                 is_playing: true,
-                artists: response.data?.item?.artists,
-                currently_playing_type: response.data?.currently_playing_type,
-                name: response.data?.item?.name,
+                artists: data.item?.artists,
+                currently_playing_type: data.currently_playing_type,
+                name: data.item?.name,
+                album: data.item?.album?.name,
+                album_image_url: data.item?.album?.images?.[0]?.url,
                 url: response.data?.item?.external_urls?.spotify,
             };
         }
