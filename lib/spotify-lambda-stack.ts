@@ -36,7 +36,7 @@ export class SpotifyLambdaStack extends Stack {
                 handler: 'now-playing.main',
                 logRetention: RetentionDays.THREE_DAYS,
                 memorySize: 128,
-                runtime: Runtime.NODEJS_14_X,
+                runtime: Runtime.NODEJS_16_X,
                 timeout: Duration.seconds(2),
             },
         );
@@ -72,7 +72,7 @@ export class SpotifyLambdaStack extends Stack {
                 handler: 'top-tracks.main',
                 logRetention: RetentionDays.THREE_DAYS,
                 memorySize: 128,
-                runtime: Runtime.NODEJS_14_X,
+                runtime: Runtime.NODEJS_16_X,
                 timeout: Duration.seconds(2),
             },
         );
