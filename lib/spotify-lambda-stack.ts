@@ -38,6 +38,7 @@ export class SpotifyLambdaStack extends Stack {
                 memorySize: 128,
                 runtime: Runtime.NODEJS_16_X,
                 timeout: Duration.seconds(2),
+                reservedConcurrentExecutions: 1,
             },
         );
 
@@ -74,6 +75,7 @@ export class SpotifyLambdaStack extends Stack {
                 memorySize: 128,
                 runtime: Runtime.NODEJS_16_X,
                 timeout: Duration.seconds(2),
+                reservedConcurrentExecutions: 1,
             },
         );
 

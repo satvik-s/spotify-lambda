@@ -7,8 +7,8 @@
   "scripts": {
     "build-now-playing": "$(npm bin)/tsc --project tsconfig.now-playing.json",
     "build-top-tracks": "$(npm bin)/tsc --project tsconfig.top-tracks.json",
-    "postbuild-now-playing": "cp package.json dist-now-playing/package.json && cd dist-now-playing && npm install --only=production --ignore-scripts",
-    "postbuild-top-tracks": "cp package.json dist-top-tracks/package.json && cd dist-top-tracks && npm install --only=production --ignore-scripts",
+    "postbuild-now-playing": "cp -r package.json package-lock.json dist-now-playing/ && cd dist-now-playing && npm ci --only=prod --ignore-scripts",
+    "postbuild-top-tracks": "cp -r package.json package-lock.json dist-top-tracks/ && cd dist-top-tracks && npm ci --only=prod --ignore-scripts",
     "watch": "$(npm bin)/tsc -w",
     "test": "$(npm bin)/jest",
     "prepare": "$(npm bin)/husky install",
@@ -21,13 +21,13 @@
     "axios": "0.27.2"
   },
   "devDependencies": {
-    "@types/jest": "27.5.2",
-    "@types/node": "17.0.44",
+    "@types/jest": "28.1.2",
+    "@types/node": "18.0.0",
     "@typescript-eslint/eslint-plugin": "5.28.0",
     "@typescript-eslint/parser": "5.28.0",
     "aws-cdk-lib": "2.28.1",
     "constructs": "10.1.42",
-    "eslint": "8.17.0",
+    "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-eslint-comments": "3.2.0",
     "eslint-plugin-import": "2.26.0",
