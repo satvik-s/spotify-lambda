@@ -8,3 +8,4 @@ Makefile
 .gitignore
 node_modules/
 **/*.yml
+.vsocde

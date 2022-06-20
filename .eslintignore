@@ -1,3 +1,6 @@
-dist*/
-cdk.out/
+dist*
 node_modules/
+**/*.js
+**/*.json
+cdk.out/
+.vscode
